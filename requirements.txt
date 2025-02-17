@@ -1,0 +1,3 @@
+ucimlrepo
+pandas
+scikit-learn
