@@ -230,29 +230,33 @@ class NeuralNetwork:
                             self.b = best_biases
                         break
 
-    def plot_loss_history(self):
+    def plot_loss_history(self, save_path=None):
         plt.figure(figsize=(10, 6))
-        plt.plot(self.train_loss_history, label="Training Loss", color='blue')
+        plt.plot(self.train_loss_history, label="Training Loss", color='red')
         if self.val_loss_history is not None and len(self.val_loss_history) > 0:
-            plt.plot(self.val_loss_history, label="Validation Loss", color='red', linestyle='dashed')
+            plt.plot(self.val_loss_history, label="Validation Loss", color='blue', linestyle='dashed')
         plt.xlabel("Epochs")
-        plt.ylabel("Loss")
-        plt.title("Loss History")
+        plt.ylabel(f"Loss ({self.loss_function_name.title()})")
+        plt.title(f"Loss ({self.loss_function_name.title()}) History")
         plt.legend()
+        if save_path is not None:
+            plt.savefig(save_path)
         plt.show()
 
-    def plot_accuracy_history(self):
+    def plot_accuracy_history(self, save_path=None):
         if self.task != "classification" or self.train_accuracy_history is None:
             print("Accuracy history is only available for classification tasks.")
             return
         plt.figure(figsize=(10, 6))
-        plt.plot(self.train_accuracy_history, label="Training Accuracy", color='blue')
+        plt.plot(self.train_accuracy_history, label="Training Accuracy", color='red')
         if self.val_accuracy_history is not None and len(self.val_accuracy_history) > 0:
-            plt.plot(self.val_accuracy_history, label="Validation Accuracy", color='red', linestyle='dashed')
+            plt.plot(self.val_accuracy_history, label="Validation Accuracy", color='blue', linestyle='dashed')
         plt.xlabel("Epochs")
         plt.ylabel("Accuracy")
         plt.title("Accuracy History")
         plt.legend()
+        if save_path is not None:
+            plt.savefig(save_path)
         plt.show()
 
     def predict(self, X):
