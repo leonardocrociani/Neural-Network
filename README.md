@@ -1,24 +1,26 @@
-# Doc
+# Doc...?
 
 [Note: il codice va fatto partire dalla folder src/, per evitare che i dataset vengano riscaricati]
 
 La rete è stata implementata per intero. 
 
-Un esempio d'uso - MONK, classificazione - è in run_experiments_monk.py.
-Un altro esempio d'uso - CUP, regressione - è in run_experiments_cup.py.
+Un esempio d'uso - MONK, classificazione - è in run_experiments_monk.ipynb.
+Un altro esempio d'uso - CUP, regressione - è in run_experiments_cup.ipynb.
 
 Cose rimaste da fare:
 - Analisi. Questo include tutte le indicazioni di micheli su come variare gli iperparametri, quale validation schema usare, come fare model selection e come fare model assessment, eccetera - da leggere le indicazioni **molto chiaramente**. 
 - Slides.
 - Questo report è da tenere in considerazione (almeno per la parte di monk: https://github.com/dilettagoglia/impl-NN-from-scratch/blob/main/GOGLIA_MURGIA_Report.pdf)
 
-MOLTO IMPORTANTE: PER QUALSIASI COSA CONSULTIAMOCI
+MOLTO IMPORTANTE: PER QUALSIASI PROBLEMA CONSULTIAMOCI, IO SONO A DISPOSIZIONE 24/7 🔥 (ma non chiamarmi alle 4 di notte per verificare...)
 
-# Cosa è stato fatto:
+# Cosa è stato fatto*:
+
+\*: dovrebbe essere tutto ciò che micheli chiedeva per l'implementazione.
 
 ### Learning
 
-- Backpropagation di base, con mini-batch
+- Learning di base
 
 - Tecniche per il decadimento del learning rate. Parametri da passare al costruttore della rete:
     - lr_decay_type ("exponential", "linear", "none")
@@ -46,7 +48,7 @@ MOLTO IMPORTANTE: PER QUALSIASI COSA CONSULTIAMOCI
 
 ### Model Selection
 
-- k-Fold cross validation, in lib/cross_validation.py
+- k-Fold cross validation, in lib/cross_validation.py (capisci meglio dai notebook di esempio)
 - Grid search, parallela, con k-fold cross validation, in lib/grid_search.py
 
 
