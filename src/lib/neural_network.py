@@ -269,7 +269,7 @@ class NeuralNetwork:
     def evaluate(self, X, y):
         predictions = self.predict(X)
         if self.task == "regression":
-            return loss_functions["mse"](y, predictions)
+            return loss_functions["mee"](y, predictions)
         else:
             if y.ndim > 1 and y.shape[1] > 1:
                 y_true = np.argmax(y, axis=1)

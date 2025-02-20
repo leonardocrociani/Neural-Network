@@ -22,10 +22,6 @@ monk_urls = {
     },
 }
 
-columns = ["label", "a1", "a2", "a3", "a4", "a5", "a6", "id"]
-
-encoder = OneHotEncoder()
-
 def download_if_not_exists(url, filepath):
     if not os.path.exists(filepath):
         print(f"Downloading {filepath}...")
@@ -43,6 +39,8 @@ def postprocess_label(y):
     return y
 
 def get_monks_dataset(id, one_hot_encode=False):
+    columns = ["label", "a1", "a2", "a3", "a4", "a5", "a6", "id"]
+    encoder = OneHotEncoder()
     name = f"MONK-{id}"
     urls = monk_urls[name]
 
@@ -76,3 +74,22 @@ def get_monks_dataset(id, one_hot_encode=False):
         return X_train_encoded, y_train, X_test_encoded, y_test
 
     return X_train.toarray(), y_train, X_test.toarray(), y_test
+
+def get_cup_dataset(dev_set_size=0.8):
+    """
+    Ritorna dev set e (internal) test set. L'output da submittare dovrà essere fatto su un test set diverso: usa get_cup_test_set().
+    I set sono ritornati in questo ordine: X_dev, y_dev, X_test, y_test
+    """
+    column_names = ["ID"] + [f"INPUT_{i+1}" for i in range(12)] + ["TARGET_x", "TARGET_y", "TARGET_z"]
+    
+    df = pd.read_csv("../datasets/cup/ML-CUP24-TR.csv", comment='#', header=None, names=column_names)
+    
+    X = df.drop(columns=["ID", "TARGET_x", "TARGET_y", "TARGET_z"]).to_numpy()
+    y = df[["TARGET_x", "TARGET_y", "TARGET_z"]].to_numpy()
+
+    N = X.shape[0]
+    N_dev = int(N * dev_set_size)
+    X_dev, y_dev = X[:N_dev], y[:N_dev]
+    X_test, y_test = X[N_dev:], y[N_dev:]
+    
+    return X_dev, y_dev, X_test, y_test
