@@ -3,7 +3,9 @@ import pandas as pd
 from urllib.request import urlretrieve
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
+import csv
 
+TEAM_NAME = 'lorcana'
 CACHE_DIR = "../datasets/monks"
 os.makedirs(CACHE_DIR, exist_ok=True)
 
@@ -77,7 +79,7 @@ def get_monks_dataset(id, one_hot_encode=False):
 
 def get_cup_dataset(dev_set_size=0.8):
     """
-    Ritorna dev set e (internal) test set. L'output da submittare dovrà essere fatto su un test set diverso: usa get_cup_test_set().
+    Ritorna dev set e (internal) test set. L'output da submittare dovrà essere fatto su un test set diverso: usa get_cup_final_test_set().
     I set sono ritornati in questo ordine: X_dev, y_dev, X_test, y_test
     """
     column_names = ["ID"] + [f"INPUT_{i+1}" for i in range(12)] + ["TARGET_x", "TARGET_y", "TARGET_z"]
@@ -93,3 +95,29 @@ def get_cup_dataset(dev_set_size=0.8):
     X_test, y_test = X[N_dev:], y[N_dev:]
     
     return X_dev, y_dev, X_test, y_test
+
+
+def get_cup_final_test_set():
+    """
+    Ritorna il test set finale su cui fare le predizioni da submittare.
+    """
+    column_names = ["ID"] + [f"INPUT_{i+1}" for i in range(12)]
+    
+    df = pd.read_csv("../datasets/cup/ML-CUP24-TS.csv", comment='#', header=None, names=column_names)
+    
+    X = df.drop(columns=["ID"]).to_numpy()
+    
+    return X
+
+def save_final_prediction(y_pred):
+    """
+    Salva le predizioni sul test set finale in un file CSV.
+    """
+    with open(f"../results/blind_test/{TEAM_NAME}_ML-CUP20-TS.csv", "w", newline="\n") as internal_file:
+        writer = csv.writer(internal_file, delimiter=',')
+        writer.writerow(['# Leonardo Crociani & Giacomo Trapani'])
+        writer.writerow([f'# {TEAM_NAME.title()}'])
+        writer.writerow(['# ML-CUP24 v1'])
+        writer.writerow(['# 7 March 2025'])
+        for i in range(len(y_pred)):
+            writer.writerow([str(i+1)]+list(y_pred[i]))
