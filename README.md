@@ -14,6 +14,15 @@ Cose rimaste da fare:
 
 MOLTO IMPORTANTE: PER QUALSIASI PROBLEMA CONSULTIAMOCI, IO SONO A DISPOSIZIONE 24/7 🔥 (ma non chiamarmi alle 4 di notte per verificare...)
 
+# Setup
+
+```bash
+python3.11 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd src
+```
+
 # Cosa è stato fatto*:
 
 \*: dovrebbe essere tutto ciò che micheli chiedeva per l'implementazione.
