@@ -1,0 +1,9 @@
+*/**/__pycache__
+*/**/*.pyc
+*/**/*.pyo
+*/**/*.pyd
+results/blind_test/*
+results/hyperparams_search/**/*.txt
+results/hyperparams_search/**/*.json
+venv
+.env
