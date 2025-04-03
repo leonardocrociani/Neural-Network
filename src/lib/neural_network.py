@@ -277,7 +277,10 @@ class NeuralNetwork:
             if self.lr_decay_type == "exponential":
                 self.learning_rate = self.initial_learning_rate * np.exp(-self.decay_rate * epoch)
             elif self.lr_decay_type == "linear":
-                self.learning_rate = self.initial_learning_rate * max(0, 1 - self.decay_rate * epoch)
+                self.learning_rate = self.initial_learning_rate * max(
+                    self.initial_learning_rate * 0.01, # 1% of the initial learning rate
+                    1 - self.decay_rate * epoch
+                )
 
             # shuffling the samples
             permutation = np.random.permutation(n_samples)
