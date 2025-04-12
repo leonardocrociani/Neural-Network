@@ -26,7 +26,6 @@ def compute_reg_loss(W_list, lambda_reg, reg_type):
 def compute_reg_gradient(W, lambda_reg, reg_type):
     """
     Computes the regularization gradient for a given weight matrix W.
-    [NOTE: The value will be divided by the #samples in the _compute_gradients method]
     Args:
         W: np.ndarray, the weight matrix
         lambda_reg: float, the regularization parameter
@@ -37,6 +36,6 @@ def compute_reg_gradient(W, lambda_reg, reg_type):
     if reg_type == "l2":
         return lambda_reg * W
     elif reg_type == "l1":
-        return lambda_reg * np.sign(W) 
+        return lambda_reg * np.sign(W)  # https://www.idi.ntnu.no/emner/it3030/lectures/deep-lecture-3.pdf
     else:
         return 0
