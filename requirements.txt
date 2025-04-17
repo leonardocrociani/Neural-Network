@@ -3,4 +3,5 @@ pandas
 numpy
 scikit-learn
 matplotlib
+joblib
 requests # for telegram updates
